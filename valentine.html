@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Divya ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#ff4d6d,#ff8fab);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* Floating hearts */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    animation:floatUp 6s linear infinite;
+    opacity:0.8;
+}
+@keyframes floatUp{
+    from{transform:translateY(0);opacity:1;}
+    to{transform:translateY(-110vh);opacity:0;}
+}
+
+.card{
+    background:rgba(0,0,0,0.35);
+    padding:30px;
+    border-radius:20px;
+    width:340px;
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+button{
+    padding:10px 22px;
+    border:none;
+    border-radius:25px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+.yes{
+    background:#ffe0e9;
+    color:#b0003a;
+    margin-right:10px;
+}
+
+.no{
+    background:#444;
+    color:white;
+    position:absolute;
+}
+
+/* Hug image */
+.hug-img{
+    width:100%;
+    border-radius:18px;
+    margin-top:15px;
+    animation:zoomIn 1.5s ease;
+}
+@keyframes zoomIn{
+    from{transform:scale(0.6);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+
+/* WhatsApp typing */
+.typing{
+    background:#e5ddd5;
+    color:#000;
+    padding:10px 14px;
+    border-radius:10px;
+    width:fit-content;
+    margin:15px auto 0;
+    font-size:14px;
+}
+.dot{
+    animation:blink 1.4s infinite both;
+}
+.dot:nth-child(2){animation-delay:.2s}
+.dot:nth-child(3){animation-delay:.4s}
+
+@keyframes blink{
+    0%{opacity:.2}
+    20%{opacity:1}
+    100%{opacity:.2}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h2>💌 Divya</h2>
+    <p>
+        In a world full of choices,<br>
+        my heart keeps choosing you ❤️<br><br>
+        Will you be my Valentine? 💕
+    </p>
+    <br>
+    <button class="yes" onclick="yesAnswer()">YES 💖</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">NO 🙈</button>
+</div>
+
+<script>
+// Floating hearts generator
+setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤️";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(Math.random()*20+12)+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+// Funny NO button texts
+const noTexts=[
+    "Are you sure? 😜",
+    "Really? 😏",
+    "Think again 🤭",
+    "Seriously? 🙄",
+    "Try again 😆",
+    "No is illegal 😝",
+    "Come on Divya 🥺",
+    "Nice try 😂",
+    "That button is broken 😜"
+];
+let noIndex=0;
+
+function moveNo(){
+    const noBtn=document.getElementById("noBtn");
+    const card=document.querySelector(".card");
+
+    noBtn.innerText=noTexts[noIndex];
+    noIndex=(noIndex+1)%noTexts.length;
+
+    noBtn.style.left=Math.random()*(card.clientWidth-noBtn.offsetWidth)+"px";
+    noBtn.style.top=Math.random()*(card.clientHeight-noBtn.offsetHeight)+"px";
+}
+
+// YES action
+function yesAnswer(){
+    document.getElementById("card").innerHTML=`
+        <h2>🥰 Divya</h2>
+
+        <img src="hug.png" class="hug-img" alt="Hug ❤️">
+
+        <div class="typing">
+            typing<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </div>
+    `;
+
+    setTimeout(showMessage,3000);
+}
+
+function showMessage(){
+    document.getElementById("card").innerHTML+=`
+        <div style="
+            background:#dcf8c6;
+            color:#000;
+            padding:12px;
+            border-radius:10px;
+            margin-top:10px;
+            text-align:left;">
+            <b>You</b><br>
+            Happy Valentine’s Day ❤️<br>
+            I choose you… today, tomorrow & always 💕
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
